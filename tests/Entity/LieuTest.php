@@ -6,9 +6,12 @@ use App\Entity\Lieu;
 
 
 class LieuTest extends TestCase {
+    protected $lieu;
+    public function setUp()  {
+        $this->lieu = new Lieu(); 
+    }
     public function testLieu() {
-        $lieu = new Lieu();
-        $this->assertInstanceOf(Lieu::class, $lieu);
-        $this->assertNull($lieu->getId());
+        $this->assertInstanceOf(Lieu::class, $this->lieu);
+        $this->assertNull($this->lieu->getId());
     }
 }
