@@ -10,8 +10,14 @@ class LieuTest extends TestCase {
     public function setUp()  {
         $this->lieu = new Lieu(); 
     }
+    
     public function testLieu() {
         $this->assertInstanceOf(Lieu::class, $this->lieu);
         $this->assertNull($this->lieu->getId());
+    }
+    
+    public function testLieuNom() {
+        $this->lieu->setNom('ici');
+        $this->assertEquals('ici', $this->getNom());
     }
 }
