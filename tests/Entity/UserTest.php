@@ -6,22 +6,26 @@ use App\Entity\User;
 
 
 class UserTest extends TestCase {
+
+    protected $user;
+    
+    public function setUp() {
+        $this->user = new User();
+    }
+    
     public function testNewUser() {
-        $user = new User();
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertNull($user->getId());
+        $this->assertInstanceOf(User::class, $this->user);
+        $this->assertNull($this->user->getId());
     }
 
     public function testUserNom() {
-        $user = new User();
-        $user->setNom("martin");
-        $this->assertEquals("martin", $user->getNom());
+        $this->user->setNom("martin");
+        $this->assertEquals("martin", $this->user->getNom());
     }
 
     public function testUserPrenom() {
-        $user = new User();
-        $user->setPrenom("Jean-Pierre");
-        $this->assertEquals("Jean-Pierre", $user->getPrenom());
+        $this->user->setPrenom("Jean-Pierre");
+        $this->assertEquals("Jean-Pierre", $this->user->getPrenom());
     }
 
 }
