@@ -7,6 +7,7 @@ use App\Entity\Lieu;
 
 class LieuTest extends TestCase {
     protected $lieu;
+    
     public function setUp()  {
         $this->lieu = new Lieu(); 
     }
@@ -19,5 +20,15 @@ class LieuTest extends TestCase {
     public function testLieuNom() {
         $this->lieu->setNom('ici');
         $this->assertEquals('ici', $this->lieu->getNom());
+    }
+    
+    public function testLieuLatitude() {
+        $this->lieu->setLatitude(0.01);
+        $this->assertEquals(0.01, $this->lieu->getLatitude());
+    }
+    
+    public function testLieuLongitude() {
+        $this->lieu->setLongitude(0.01);
+        $this->assertEquals(0.01, $this->lieu->getLongitude());
     }
 }
