@@ -18,6 +18,6 @@ class LieuTest extends TestCase {
     
     public function testLieuNom() {
         $this->lieu->setNom('ici');
-        $this->assertEquals('ici', $this->getNom());
+        $this->assertEquals('ici', $this->lieu->getNom());
     }
 }
