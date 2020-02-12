@@ -55,9 +55,15 @@ class User implements UserInterface
      */
     private $conducteurtrajets;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Trajet", mappedBy="passagers")
+     */
+    private $passagertrajets;
+
     public function __construct()
     {
         $this->conducteurtrajets = new ArrayCollection();
+        $this->passagertrajets = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -195,6 +201,34 @@ class User implements UserInterface
             if ($conducteurtrajet->getConducteur() === $this) {
                 $conducteurtrajet->setConducteur(null);
             }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getPassagertrajets(): Collection
+    {
+        return $this->passagertrajets;
+    }
+
+    public function addPassagertrajet(Trajet $passagertrajet): self
+    {
+        if (!$this->passagertrajets->contains($passagertrajet)) {
+            $this->passagertrajets[] = $passagertrajet;
+            $passagertrajet->addPassager($this);
+        }
+
+        return $this;
+    }
+
+    public function removePassagertrajet(Trajet $passagertrajet): self
+    {
+        if ($this->passagertrajets->contains($passagertrajet)) {
+            $this->passagertrajets->removeElement($passagertrajet);
+            $passagertrajet->removePassager($this);
         }
 
         return $this;
