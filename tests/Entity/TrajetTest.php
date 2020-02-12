@@ -4,6 +4,7 @@ namespace App\Tests\Entity;
 use PHPUnit\Framework\TestCase;
 use App\Entity\Trajet;
 use App\Entity\Lieu;
+use App\Entity\User;
 
 
 class TrajetTest extends TestCase {
@@ -29,7 +30,7 @@ class TrajetTest extends TestCase {
         $this->assertEquals($date, $this->trajet->getDatetime());
     }
 
-    public function testLieuDepart() {
+    public function testTrajetLieuDepart() {
         $lieu = new Lieu();
         $this->trajet->setLieuDepart($lieu);
         $lieu->addDepartTrajet($this->trajet);
@@ -37,12 +38,20 @@ class TrajetTest extends TestCase {
         $this->assertContains($this->trajet, $lieu->getDeparttrajets());
     }
               
-    public function testLieuArrivee() {
+    public function testTrajetLieuArrivee() {
         $lieu = new Lieu();
         $this->trajet->setLieuArrivee($lieu);
         $lieu->addArriveeTrajet($this->trajet);
         $this->assertEquals($lieu, $this->trajet->getLieuArrivee());
         $this->assertContains($this->trajet, $lieu->getArriveetrajets());
+    }
+              
+    public function testTrajetConducteur() {
+        $user = new User();
+        $this->trajet->setConducteur($user);
+        $user->addConducteurtrajets($this->trajet);
+        $this->assertEquals($user, $this->trajet->getConducteur());
+        $this->assertContains($this->trajet, $user->getConducteurtrajets());
     }
               
 }
