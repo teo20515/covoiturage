@@ -37,5 +37,9 @@ class UserTest extends TestCase {
         $this->user->setPassword("xyz");
         $this->assertEquals("xyz", $this->user->getPassword());
     }
+    public function testUserEmail() {
+        $this->user->setEmail("jpm@mail.net");
+        $this->assertEquals("jpm@mail.net", $this->user->getEmail());
+    }
 
 }
