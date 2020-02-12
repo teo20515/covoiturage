@@ -59,7 +59,7 @@ class TrajetTest extends TestCase {
         $this->trajet->addPassager($user);
         $user->addPassagertrajet($this->trajet);
         $this->assertContains($user, $this->trajet->getPassagers());
-        $this->assertContains($this->trajet, $user->getPassagerstrajets());
+        $this->assertContains($this->trajet, $user->getPassagertrajets());
     }
               
 }
