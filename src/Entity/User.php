@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -47,6 +49,16 @@ class User implements UserInterface
      * @ORM\Column(type="string", length=255)
      */
     private $prenom;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Trajet", mappedBy="conducteur", orphanRemoval=true)
+     */
+    private $conducteurtrajets;
+
+    public function __construct()
+    {
+        $this->conducteurtrajets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -153,6 +165,37 @@ class User implements UserInterface
     public function setPrenom(string $prenom): self
     {
         $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Trajet[]
+     */
+    public function getConducteurtrajets(): Collection
+    {
+        return $this->conducteurtrajets;
+    }
+
+    public function addConducteurtrajet(Trajet $conducteurtrajet): self
+    {
+        if (!$this->conducteurtrajets->contains($conducteurtrajet)) {
+            $this->conducteurtrajets[] = $conducteurtrajet;
+            $conducteurtrajet->setConducteur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeConducteurtrajet(Trajet $conducteurtrajet): self
+    {
+        if ($this->conducteurtrajets->contains($conducteurtrajet)) {
+            $this->conducteurtrajets->removeElement($conducteurtrajet);
+            // set the owning side to null (unless already changed)
+            if ($conducteurtrajet->getConducteur() === $this) {
+                $conducteurtrajet->setConducteur(null);
+            }
+        }
 
         return $this;
     }
