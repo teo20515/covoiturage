@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\CsrfTokenManager;
+use Symfony\Component\Security\Csrf\CsrfTokenManagerInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -42,7 +45,13 @@ class SecurityController extends AbstractController
         return $this->render('security/register.html.twig');
     }
 
-    public function createUser(Request $request, UserPasswordEncoderInterface $passwordEncoder){
+    public function createUser(Request $request, UserPasswordEncoderInterface $passwordEncoder, CsrfTokenManagerInterface $tokenManager){
+
+        $token = new CsrfToken('register', $request->request->get('_csrf_token'));
+        if(!$tokenManager->isTokenValid($token) || $request->request->count() !== 0){
+            return new Response('UNACCEPTABLE',Response::HTTP_NOT_ACCEPTABLE);
+        }
+
         $username = $request->request->get('newUsername');
         $password = $request->request->get('newPassword');
         $nom = $request->request->get('newLastName');
