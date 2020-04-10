@@ -3,12 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Security\LoginFormAuthenticator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Exception\NotImplementedException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
@@ -40,7 +42,7 @@ class SecurityController extends AbstractController
         return $this->render('security/register.html.twig');
     }
 
-    public function createUser(Request $request){
+    public function createUser(Request $request, UserPasswordEncoderInterface $passwordEncoder){
         $username = $request->request->get('newUsername');
         $password = $request->request->get('newPassword');
         $nom = $request->request->get('newLastName');
@@ -49,7 +51,7 @@ class SecurityController extends AbstractController
 
         $user = new User();
         $user->setUsername($username);
-        $user->setPassword($password);
+        $user->setPassword($passwordEncoder->encodePassword($user, $password));
         $user->setNom($nom);
         $user->setPrenom($prenom);
         $user->setEmail($email);
