@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Exception\NotImplementedException;
@@ -12,9 +13,6 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 class SecurityController extends AbstractController
 {
-    /**
-     * @Route("/login", name="app_login")
-     */
     public function login(AuthenticationUtils $authenticationUtils): Response
     {
         // if ($this->getUser()) {
@@ -45,9 +43,22 @@ class SecurityController extends AbstractController
     public function createUser(Request $request){
         $username = $request->request->get('newUsername');
         $password = $request->request->get('newPassword');
+        $nom = $request->request->get('newLastName');
+        $prenom = $request->request->get('newFirstName');
+        $email = $request->request->get('newEmail');
 
         $user = new User();
+        $user->setUsername($username);
+        $user->setPassword($password);
+        $user->setNom($nom);
+        $user->setPrenom($prenom);
+        $user->setEmail($email);
 
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($user);
+        $em->flush();
+
+        return $this->redirectToRoute('app_login');
     }
     
 }
