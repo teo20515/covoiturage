@@ -13,3 +13,15 @@ app_login:
 createUser:
     path: /createUser
     controller: App\Controller\SecurityController::createUser
+
+new_trajet:
+    path: /trajet/add
+    controller: App\Controller\TrajetController::add
+
+new_lieu:
+    path: /lieu/add
+    controller: App\Controller\LieuController::add
+
+accueil:
+    path: /accueil
+    controller: App\Controller\AccueilController::index

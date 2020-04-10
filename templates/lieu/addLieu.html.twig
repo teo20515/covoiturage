@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <form action="{{ path('lieu_new') }}">
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" placeholder="Enter name">
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="number" step="0.00001" class="form-control" id="latitude" placeholder="Choose latitude">
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="number" step="0.00001" class="form-control" id="longitude" placeholder="Choose longitude">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+{% endblock %}
