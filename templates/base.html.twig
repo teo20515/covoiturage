@@ -1,21 +1,25 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link type="text/css" href="{{ asset('css/bootstrap-4/bootstrap.min.css') }}">
-        <link type="text/css" href="{{ asset('css/fontawsome-5.all.min.css') }}">
-        <link type="text/css" href="{{ asset('css/projet.css') }}">
-        {% block stylesheets %}{% endblock %}
-    </head>
-    
-    <body>
-        {% block body %}{% endblock %}
-    </body>
-    
-    {% block javascripts %}{% endblock %}
-    <script src="{{ asset('js/jquery-3/jquery.slim.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-4/bootstrap.bundle.min.js') }}"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {#    <link type="stylesheet" href="{{ asset('css/bootstrap-4/bootstrap.min.css') }}">#}
+    {#    <link type="stylesheet" href="{{ asset('css/fontawsome-5.all.min.css') }}">#}
+    {#    <link type="stylesheet" href="{{ asset('css/projet.css') }}">#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    {% block stylesheets %}{% endblock %}
+</head>
+
+<body>
+{% include "default/navbar.html.twig" %}
+{% block body %}{% endblock %}
+</body>
+
+{% block javascripts %}{% endblock %}
+<script src="{{ asset('js/jquery-3/jquery.slim.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap-4/bootstrap.bundle.min.js') }}"></script>
 
 </html>

@@ -3,16 +3,16 @@
 
 
 {% block body %}
-    <h1>Covoiturons</h1>
-    <p>
+{#    <h1>Covoiturons</h1>#}
+{#    <p>#}
 
-        {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-            <a href="{{ path ("app_logout") }}">Déconnexion</a>
-        {% else %}
-            <a href="{{ path("app_login") }}">Connexion</a>
-            <a href="{{ path("app_register") }}">Inscription</a>
-        {% endif %}
-    </p>
+{#        {% if is_granted('IS_AUTHENTICATED_FULLY') %}#}
+{#            <a href="{{ path ("app_logout") }}">Déconnexion</a>#}
+{#        {% else %}#}
+{#            <a href="{{ path("app_login") }}">Connexion</a>#}
+{#            <a href="{{ path("app_register") }}">Inscription</a>#}
+{#        {% endif %}#}
+{#    </p>#}
 {% endblock%}
 
 {% block javascripts %}{% endblock %}
