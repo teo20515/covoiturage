@@ -1,12 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
+
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
+        <link type="text/css" href="{{ asset('css/bootstrap-4/bootstrap.min.css') }}">
+        <link type="text/css" href="{{ asset('css/fontawsome-5.all.min.css') }}">
+        <link type="text/css" href="{{ asset('css/projet.css') }}">
         {% block stylesheets %}{% endblock %}
     </head>
+    
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
     </body>
+    
+    {% block javascripts %}{% endblock %}
+    <script src="{{ asset('js/jquery-3/jquery.slim.min.js') }}"></script>
+    <script src="{{ asset('js/bootstrap-4/bootstrap.bundle.min.js') }}"></script>
+
 </html>

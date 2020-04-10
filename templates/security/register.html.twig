@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <form action="{{ path('createUser') }}" method="post">
+
+        {% if app.user %}
+            <div class="mb-3">
+                Vous êtes déjà connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">Se déconnecter</a>
+            </div>
+        {% else %}
+            <h1 class="h3 mb-3 font-weight-normal">Créer un compte</h1>
+
+            <div class="form-group">
+                <label for="inputNewUsername">Username</label>
+                <input type="text" value="" name="newUsername" id="inputNewUsername" class="form-control" required autofocus>
+            </div>
+
+            <div class="form-group">
+                <label for="inputNewPassword">Password</label>
+                <input type="password" name="newPassword" id="inputNewPassword" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="inputNewLastName">Nom</label>
+                <input type="text" name="newLastName" id="inputNewLastName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="inputNewFirstName">Prénom</label>
+                <input type="text" name="newFirstName" id="inputNewFirstName" class="form-control" required>
+            </div>
+
+            <div class="form-group">
+                <label for="inputNewEmail">E-Mail</label>
+                <input type="email" name="newEmail" id="inputNewEmail" class="form-control" required>
+            </div>
+
+            <button class="btn btn-lg btn-primary" type="submit">Créer le compte</button>
+        {% endif %}
+
+    </form>
+{% endblock %}
